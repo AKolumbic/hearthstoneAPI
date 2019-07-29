@@ -16,7 +16,8 @@ const services = require('./services')
 const appHooks = require('./app.hooks')
 const channels = require('./channels')
 
-const mongodb = require('./mongodb')
+// const mongodb = require('./mongodb')
+const wow = require('./WOW')
 
 const app = express(feathers())
 
@@ -36,7 +37,8 @@ app.use('/', express.static(app.get('public')))
 app.configure(express.rest())
 
 
-app.configure(mongodb)
+// app.configure(mongodb)
+app.configure(wow)
 
 
 // Configure other middleware (see `middleware/index.js`)
@@ -51,5 +53,7 @@ app.use(express.notFound())
 app.use(express.errorHandler({ logger }))
 
 app.hooks(appHooks)
+
+wow(app)
 
 module.exports = app
